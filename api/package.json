@@ -7,7 +7,7 @@
     "start": "node server.js",
     "migrate": "node migrate.js",
     "test": "node --test test/unit/*.test.js",
-    "test:integration": "node --test test/integration/*.test.js",
+    "test:integration": "DATABASE_URL=postgresql://postgres:postgres@localhost:5433/papelaria node --test test/integration/*.test.js",
     "lint": "eslint .",
     "serve:front": "http-server ../front -p 5500",
     "cy:run": "start-server-and-test 'http-server ../front -p 5500 -c-1' 5500 'cypress run'",
@@ -20,7 +20,10 @@
     "pg": "^8.23.1"
   },
   "devDependencies": {
-    "cypress": "^15.7.1",
+    "@eslint/js": "^9.17.0",
+    "cypress": "^15.21.1",
+    "eslint": "^10.14.0",
+    "globals": "^15.14.0",
     "http-server": "^14.1.1",
     "start-server-and-test": "^3.0.13",
     "supertest": "^7.1.4"
