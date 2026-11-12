@@ -3,48 +3,39 @@ services:
     image: postgres:16-alpine
     container_name: papelaria-db
     restart: unless-stopped
-
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: papelaria
-
     ports:
       - "5433:5432"
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./db/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
-
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d papelaria"]
       interval: 5s
       timeout: 5s
       retries: 5
-
     shm_size: 128mb
 
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
-
     container_name: papelaria-api
     restart: unless-stopped
     init: true
-
+    # esse ccomnado garante a migração antes da api iniciar
+    command: sh -c "npm run migrate && npm start"
     environment:
       PORT: 3001
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/papelaria
       DIRECT_URL: postgresql://postgres:postgres@postgres:5432/papelaria
-
     ports:
       - "3001:3001"
-
     depends_on:
       postgres:
         condition: service_healthy
-
     healthcheck:
       test:
         - CMD
