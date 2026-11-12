@@ -8,6 +8,6 @@ export function formatarPreco(valor) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
-  }).format(numero);
+  }).format(numero).replace(/\u00A0/g, ' ');
 }
 
