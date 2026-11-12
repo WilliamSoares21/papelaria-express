@@ -7,7 +7,6 @@ import healthRouter from './health.js';
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
 app.use('/produtos', produtosRouter);
 app.use('/health', healthRouter);
