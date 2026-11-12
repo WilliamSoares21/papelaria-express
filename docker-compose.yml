@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: papelaria
     ports:
-      - "5433:5432"
+      - "127.0.0.1:5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -25,8 +25,8 @@ services:
     container_name: papelaria-api
     restart: unless-stopped
     init: true
-    # esse ccomnado garante a migração antes da api iniciar
-    command: sh -c "npm run migrate && npm start"
+    # esse comando garante a migração antes da api iniciar
+    command: sh -c "npm run migrate && node server.js"
     environment:
       PORT: 3001
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/papelaria
