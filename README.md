@@ -2,8 +2,6 @@
 
 Aplicação fullstack de consulta de produtos desenvolvida com Node.js, Express, PostgreSQL e Frontend estático (HTML, CSS e JavaScript), estruturada para práticas de ESLint, testes automatizados e CI/CD.
 
-```
-
 ## Como Rodar o Projeto
 
 ### 1. Configurar variáveis de ambiente
